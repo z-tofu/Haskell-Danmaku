@@ -25,7 +25,14 @@ source-repository head
 
 library
   exposed-modules:
+      Components
       Lib
+      Stage
+      Systems.Collision
+      Systems.EnemyAction
+      Systems.Input
+      Systems.Movement
+      Systems.Render
   other-modules:
       Paths_danmaku_game
   autogen-modules:
