@@ -12,6 +12,7 @@ import Systems.Movement (moveSystem)
 import Systems.Collision (collisionSystem)
 import Systems.Render (drawSystem)
 import Systems.EnemyAction (enemyAction)
+import Systems.Despawn (despawnSystem)
 
 gameLoop :: World -> IO ()
 gameLoop world = do
@@ -21,6 +22,7 @@ gameLoop world = do
     collisionSystem
     stageSystem     -- Handles timers and spawning
     enemyAction
+    despawnSystem
 
   beginDrawing
   clearBackground rayWhite

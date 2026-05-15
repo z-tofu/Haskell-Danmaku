@@ -29,6 +29,7 @@ library
       Lib
       Stage
       Systems.Collision
+      Systems.Despawn
       Systems.EnemyAction
       Systems.Input
       Systems.Movement
@@ -68,6 +69,7 @@ test-suite danmaku-game-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      SystemsSpec
       Paths_danmaku_game
   autogen-modules:
       Paths_danmaku_game
@@ -79,5 +81,6 @@ test-suite danmaku-game-test
     , base >=4.7 && <5
     , danmaku-game
     , h-raylib
+    , hspec
     , linear
   default-language: Haskell2010
