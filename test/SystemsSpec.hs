@@ -83,4 +83,11 @@ spec = do
         despawnSystem
         hasEnemy <- exists enemyEnt (Proxy :: Proxy Enemy)
         liftIO $ hasEnemy `shouldBe` True
-
+    
+    it "despawn player out of bounds" $ do 
+      w <- initWorld 
+      runWith w $ do 
+        playerEnt <- newEntity (Player, Position (V2 1000 1000), Velocity (V2 0 0), PlayerFireRate 10)
+        despawnSystem
+        hasPlayer <- exists playerEnt (Proxy :: Proxy Player) 
+        liftIO $ hasPlayer `shouldBe` False

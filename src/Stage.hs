@@ -5,9 +5,9 @@ import Linear (V2(..))
 import Components
 
 
-spawnWaveEnemy :: V2 Float -> V2 Float -> Int -> SystemT World IO ()
-spawnWaveEnemy pos vel hp = do
-   newEntity_ (Enemy, Position pos, Velocity vel, EnemyHealth hp, EnemyFireRate 0)
+spawnWaveEnemy :: V2 Float -> V2 Float -> Int -> Int -> SystemT World IO ()
+spawnWaveEnemy pos vel hp cd = do
+   newEntity_ (Enemy, Position pos, Velocity vel, EnemyHealth hp, EnemyCd cd, EnemyFireRate 0, EnemyRot 0)
 
 stageSystem :: SystemT World IO ()
 stageSystem = do 
@@ -24,10 +24,10 @@ stageSystem = do
 stage1TimeLine :: Int -> SystemT World IO ()
 stage1TimeLine ticks = do
    case ticks of 
-      60  -> spawnWaveEnemy (V2 200 (-20)) (V2 0 2) 5
-      120 -> spawnWaveEnemy (V2 600 (-20)) (V2 (-1) 1) 5
+      60  -> spawnWaveEnemy (V2 200 100) (V2 0 0) 5 60
+      120 -> spawnWaveEnemy (V2 600 (-20)) (V2 (-1) 1) 5 120
       300 -> do 
-         spawnWaveEnemy (V2 300 (-20)) (V2 1 1) 3
-         spawnWaveEnemy (V2 500 (-20)) (V2 (-1) 1) 3
+         spawnWaveEnemy (V2 300 (-20)) (V2 1 1) 3 120
+         spawnWaveEnemy (V2 500 (-20)) (V2 (-1) 1) 3 60
       1200 -> set global BossFight
       _ -> return ()

@@ -6,6 +6,7 @@ import Apecs
 import Linear (V2(..))
 
 import Components
+import Constants
 import Stage (stageSystem)
 import Systems.Input (handleInput)
 import Systems.Movement (moveSystem)
@@ -34,7 +35,7 @@ gameLoop world = do
 
 main :: IO ()
 main = do
-  _ <- initWindow 800 450 "Haskell Danmaku"
+  _ <- initWindow screenWidth screenHeight "Haskell Danmaku"
   setTargetFPS 60
 
   w <- initWorld
