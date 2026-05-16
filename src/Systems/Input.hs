@@ -1,5 +1,7 @@
 module Systems.Input (handleInput) where 
 
+import Constants (playerSlowSpeed, playerSpeed)
+
 import Apecs
 import Linear (V2(..), normalize, (^*))
 import Components
@@ -17,7 +19,7 @@ handleInput = cmapM $ \(Player, Velocity _, Position pos, PlayerFireRate cd) -> 
     z     <- liftIO $ isKeyDown KeyZ
 
 -- Player movement
-    let speed = (if shift then 3 else 5)
+    let speed = (if shift then fromIntegral playerSlowSpeed else fromIntegral playerSpeed)
         vx = (if right then 1 else 0) + (if left then -1 else 0)
         vy = (if down then 1 else 0) + (if up then -1 else 0)
         rawDir = V2 vx vy 
