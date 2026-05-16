@@ -13,9 +13,11 @@ spawnCircle count pos speed = do
           vel = V2 (cos angle) (sin angle) ^* speed
       newEntity_ (EnemyBullet, Position pos, Velocity vel)
 
+
+
 enemyAction :: SystemT World IO ()
-enemyAction = cmapM $ \(Enemy, Velocity _, Position pos, EnemyFireRate cd) -> do 
+enemyAction = cmapM $ \(Enemy, Velocity _, Position pos, EnemyFireRate cd, EnemyCd num) -> do 
    when (cd <= 0) $ do 
       spawnCircle 12 pos 2.8
-   let newCd = if cd <= 0 then 60 else max 0 (cd - 1) -- number in then block controls enemy firerate
+   let newCd = if cd <= 0 then num else max 0 (cd - 1) -- number in then block controls enemy firerate
    return $ EnemyFireRate newCd 

@@ -5,7 +5,7 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
-module Components where 
+module Components (module Components) where 
 
 import Apecs 
 import Linear (V2)
@@ -48,14 +48,19 @@ instance Component Velocity where type Storage Velocity= Map Velocity
 newtype PlayerFireRate = PlayerFireRate Int deriving Show
 instance Component PlayerFireRate where type Storage PlayerFireRate = Map PlayerFireRate
 
-newtype EnemyFireRate = EnemyFireRate Int deriving Show
+newtype EnemyFireRate = EnemyFireRate Int deriving Show                                           -- Should be EnemyCd
 instance Component EnemyFireRate where type Storage EnemyFireRate = Map EnemyFireRate
 
 newtype EnemyHealth = EnemyHealth Int deriving Show 
 instance Component EnemyHealth where type Storage EnemyHealth = Map EnemyHealth
 
+newtype AttackType = AttackType Int deriving Show
+instance Component AttackType where type Storage AttackType = Map AttackType
+
+newtype EnemyCd = EnemyCd Int deriving Show                                                       -- Should be EnemyFireRate 
+instance Component EnemyCd where type Storage EnemyCd = Map EnemyCd
 
 -- makeWorld
-makeWorld "World" [''Position, ''Velocity, ''Player, ''EnemyBullet, ''PlayerBullet, ''PlayerFireRate, ''Enemy, ''EnemyHealth, ''EnemyFireRate, ''GameStage, ''GameTicks]
+makeWorld "World" [''Position, ''Velocity, ''Player, ''EnemyBullet, ''PlayerBullet, ''PlayerFireRate, ''Enemy, ''EnemyHealth, ''EnemyFireRate, ''GameStage, ''GameTicks, ''AttackType, ''EnemyCd]
 
 
