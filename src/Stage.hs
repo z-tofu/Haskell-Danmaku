@@ -25,9 +25,9 @@ stage1TimeLine :: Int -> SystemT World IO ()
 stage1TimeLine ticks = do
    case ticks of 
       60  -> spawnWaveEnemy (V2 200 100) (V2 0 0) 5 60
-      -- 120 -> spawnWaveEnemy (V2 600 (-20)) (V2 (-1) 1) 5 120
-      -- 300 -> do 
-      --    spawnWaveEnemy (V2 300 (-20)) (V2 1 1) 3
-      --    spawnWaveEnemy (V2 500 (-20)) (V2 (-1) 1) 3
+      120 -> spawnWaveEnemy (V2 600 (-20)) (V2 (-1) 1) 5 120
+      300 -> do 
+         spawnWaveEnemy (V2 300 (-20)) (V2 1 1) 3 120
+         spawnWaveEnemy (V2 500 (-20)) (V2 (-1) 1) 3 60
       1200 -> set global BossFight
       _ -> return ()

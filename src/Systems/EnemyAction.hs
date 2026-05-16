@@ -32,7 +32,7 @@ spawnSpinningRose count k rotationOffset pos speed = do
 enemyAction :: SystemT World IO ()
 enemyAction = cmapM $ \(Enemy, Velocity _, Position pos, EnemyFireRate cd, EnemyCd fr) -> do
    when (cd <= 0) $ do
-      spawnSpinningRose 120 5.0 5.0 pos 1.7
-      -- spawnCircle 12 pos 2.8
+      -- spawnSpinningRose 120 5.0 5.0 pos 1.7
+      spawnCircle 12 pos 2.8
    let newCd = if cd <= 0 then fr else max 0 (cd - 1) -- number in then block controls enemy firerate
    return $ EnemyFireRate newCd 
