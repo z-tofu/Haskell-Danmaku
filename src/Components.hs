@@ -60,7 +60,10 @@ instance Component AttackType where type Storage AttackType = Map AttackType
 newtype EnemyCd = EnemyCd Int deriving Show                                                       -- Should be EnemyFireRate 
 instance Component EnemyCd where type Storage EnemyCd = Map EnemyCd
 
+newtype EnemyRot = EnemyRot Float deriving Show 
+instance Component EnemyRot where type Storage EnemyRot = Map EnemyRot
+
 -- makeWorld
-makeWorld "World" [''Position, ''Velocity, ''Player, ''EnemyBullet, ''PlayerBullet, ''PlayerFireRate, ''Enemy, ''EnemyHealth, ''EnemyFireRate, ''GameStage, ''GameTicks, ''AttackType, ''EnemyCd]
+makeWorld "World" [''Position, ''Velocity, ''Player, ''EnemyBullet, ''PlayerBullet, ''PlayerFireRate, ''Enemy, ''EnemyHealth, ''EnemyFireRate, ''GameStage, ''GameTicks, ''AttackType, ''EnemyCd, ''EnemyRot]
 
 
