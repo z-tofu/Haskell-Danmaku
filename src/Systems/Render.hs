@@ -17,7 +17,11 @@ drawSystem assets = do
       liftIO $ drawCircle (round x) (round y) 4 maroon
    
    cmapM_ $ \(Player, Position (V2 x y)) -> liftIO $ do 
-      drawTexture (playerSprite assets) (round x) (round y) white
+      let spriteWidth = 32
+          spriteHeight = 32
+          offsetX = round x - (spriteWidth `div` 2)
+          offsetY = round y - (spriteHeight `div` 2)
+      drawTexture (playerSprite assets) offsetX offsetY white
       drawCircle (round x) (round y) 6 skyBlue
 
    cmapM_ $ \(PlayerBullet, Position (V2 x y)) ->
