@@ -2,6 +2,8 @@ module Main (main) where
 
 import Raylib.Core (initWindow, windowShouldClose, closeWindow, setTargetFPS, beginDrawing, endDrawing, clearBackground)
 import Raylib.Util.Colors (rayWhite)
+import Raylib.Core.Textures (loadTexture)
+-- import Raylib.Types (Texture)
 import Apecs
 import Linear (V2(..))
 
@@ -14,9 +16,10 @@ import Systems.Collision (collisionSystem)
 import Systems.Render (drawSystem)
 import Systems.EnemyAction (enemyAction)
 import Systems.Despawn (despawnSystem)
+import Systems.LoadSprite (Assets(..))
 
-gameLoop :: World -> IO ()
-gameLoop world = do
+gameLoop :: Assets -> World -> IO ()
+gameLoop assets world = do
   runWith world $ do
     handleInput
     moveSystem
@@ -27,16 +30,19 @@ gameLoop world = do
 
   beginDrawing
   clearBackground rayWhite
-  runWith world drawSystem
+  runWith world (drawSystem assets)
   endDrawing
 
   shouldClose <- windowShouldClose
-  if shouldClose then closeWindow Nothing else gameLoop world
+  if shouldClose then closeWindow Nothing else gameLoop assets world
 
 main :: IO ()
 main = do
   _ <- initWindow screenWidth screenHeight "Haskell Danmaku"
   setTargetFPS 60
+
+  assets <- Assets 
+     <$> loadTexture "assets/sprite.png"
 
   w <- initWorld
   runWith w $ do
@@ -46,4 +52,4 @@ main = do
     -- Spawn Player
     newEntity_ (Player, Position (V2 400 300), Velocity (V2 0 0), PlayerFireRate 0)
 
-  gameLoop w
+  gameLoop assets w

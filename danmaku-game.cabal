@@ -33,6 +33,7 @@ library
       Systems.Despawn
       Systems.EnemyAction
       Systems.Input
+      Systems.LoadSprite
       Systems.Movement
       Systems.Render
   other-modules:
